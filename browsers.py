@@ -1,4 +1,4 @@
-import pychrome, time, os
+import pychrome, time
 from selenium import webdriver
 from urllib.parse import urlparse, parse_qs
 
