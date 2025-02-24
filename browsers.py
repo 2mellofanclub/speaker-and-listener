@@ -15,7 +15,8 @@ def handle_request_event(*args, **kwargs):
     #                                           #
     #############################################
     print(f"url: {urlparse(request_url).path}")
-    print(f"query string: {request_query_string}")
+    if len(request_query_string) > 0:
+        print(f"query string: {request_query_string}")
 
 # this selenium browser will do the web browsing
 options = webdriver.ChromeOptions()
@@ -45,9 +46,6 @@ with open("testpages.txt", encoding="utf-8") as pages:
             print(err)
 print("All done.")
 # wont go clean
-try:
-    tab.stop()
-except:
-    pass
+tab.stop()
 driver.quit()
 
