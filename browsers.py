@@ -18,8 +18,10 @@ def handle_request_event(*args, **kwargs):
     if len(request_query_string) > 0:
         print(f"query string: {request_query_string}")
 
+
 # this selenium browser will do the web browsing
 options = webdriver.ChromeOptions()
+# arbitrary port number 7777
 options.add_argument("--remote-debugging-port=7777")
 options.add_argument("--remote-allow-origins=http://localhost:7777")
 options.add_argument("--ignore-certificate-errors")
@@ -33,7 +35,6 @@ tab.call_method("Network.enable", _timeout=20)
 tab.set_listener("Network.requestWillBeSent", handle_request_event)
 
 
-
 with open("testpages.txt", encoding="utf-8") as pages:
     print("\n\n")
     for page in pages:
@@ -45,7 +46,7 @@ with open("testpages.txt", encoding="utf-8") as pages:
         except Exception as err:
             print(err)
 print("All done.")
-# wont go clean
+# some kind of chicken-and-egg problem with shutting these down, expect errors
 tab.stop()
 driver.quit()
 
